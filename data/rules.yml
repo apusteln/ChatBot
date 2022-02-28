@@ -1,0 +1,44 @@
+version: "3.0"
+
+# - rule: Always greet after greet
+#   steps:
+#     - intent: greet
+#     - action: utter_greet
+
+# - rule: Denied order request
+#   steps:
+#   - intent: place_a_specific_order
+#   - action: action_check_if_on_menu
+#   - intent: deny
+#   - action: utter_sad_goodbye
+
+- rule: Always ask additional specifics without
+  steps:
+  - intent: place_a_specific_order
+  - action: action_check_if_on_menu
+  - intent: affirm
+  - action: utter_any_additional_requests
+  - intent: deny
+  - action: action_place_an_order
+
+- rule: Always ask additional specifics with
+  steps:
+  - intent: place_a_specific_order
+  - action: action_check_if_on_menu
+  - intent: affirm
+  - action: utter_any_additional_requests
+  - intent: affirm
+  - action: utter_please_enter_specifics
+  - intent: list_specifics
+  - action: action_place_an_order
+
+# - rule: Say goodbye anytime the user says goodbye
+#   steps:
+#   - intent: goodbye
+#   - action: utter_goodbye
+
+# - rule: Say 'I am a bot' anytime the user challenges
+#   steps:
+#   - intent: bot_challenge
+#   - action: utter_iamabot
+

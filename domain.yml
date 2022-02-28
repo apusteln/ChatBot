@@ -1,0 +1,82 @@
+version: '3.0'
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
+intents:
+- affirm
+- deny
+- place_a_specific_order
+- goodbye
+- are_we_open_at_date_time
+- whats_on_the_menu
+- need_help
+- list_specifics
+- greet
+- bot_challenge
+entities:
+- date
+- item
+- time
+slots:
+  item:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: item
+  date:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: date
+  time:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: time
+  specifics:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_text
+responses:
+  utter_greet:
+  - text: Hey! How are you?
+  - text: Hello there!
+  - text: Hi!
+  utter_happy:
+  - text: Great, carry on!
+  - text: Nice!
+  - text: Good!
+  utter_goodbye:
+  - text: Goodbye
+  - text: Bye
+  utter_sad_goodbye:
+  - text: Sorry, we hope you come back soon!
+  - text: Tht's unfortunate, have a nice day!
+  utter_can_i_help:
+  - text: Can I help you in any way?
+  - text: How can I help you?
+  - text: How can I assist you?
+  utter_any_additional_requests:
+  - text: Do you need anything specific about this order?
+  - text: Do you have any requests about this order?
+  - text: Any addidional requests about this order?
+  utter_iamabot:
+  - text: I am a bot, a bot for ordering food!
+  - text: I'm just a bot that lists the menu options.
+  utter_please_enter_specifics:
+  - text: Alright, please list your order specifications.
+  - text: Please say how we can specify your order.
+actions:
+- action_check_if_on_menu
+- action_fetch_all_menu
+- action_place_an_order
+- action_tell_if_open_on_date_time
+- utter_any_additional_requests
+- utter_can_i_help
+- utter_goodbye
+- utter_greet
+- utter_please_enter_specifics

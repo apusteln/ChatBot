@@ -1,0 +1,43 @@
+[
+  {
+    "text": "Are you open tomorrow at 2am?",
+    "entities": [
+      {
+        "start": 13,
+        "end": 21,
+        "value": "tomorrow",
+        "entity": "date"
+      },
+      {
+        "start": 25,
+        "end": 28,
+        "value": "2am",
+        "entity": "time"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "date",
+        "start": 13,
+        "end": 21,
+        "confidence_entity": 0.9981030225753784,
+        "value": "tomorrow",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "I'd like the banana to be yellow",
+    "entities": [],
+    "predicted_entities": [
+      {
+        "entity": "item",
+        "start": 13,
+        "end": 19,
+        "confidence_entity": 0.7793658971786499,
+        "value": "banana",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  }
+]

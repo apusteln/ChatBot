@@ -1,0 +1,161 @@
+version: "3.0"
+nlu:
+- intent: greet
+  examples: |
+    - hey
+    - hello
+    - hi
+    - hello there
+    - good morning
+    - good evening
+    - moin
+    - mornin
+    - hey there
+    - let's go
+    - hey dude
+    - goodmorning
+    - goodevening
+    - good afternoon
+    - how do you do?
+    - Hello, is someone there?
+- intent: need_help
+  examples: |
+    - Is anyone there?
+    - Can you help me?
+    - I need assistance
+    - I want help
+    - I need help
+    - Hello, is anyone htere?
+    - Hello, is anyone there?
+- intent: goodbye
+  examples: |
+    - cu
+    - good by
+    - cee you later
+    - good night
+    - bye
+    - goodbye
+    - have a nice day
+    - see you around
+    - bye bye
+    - see you later
+    - that is all
+    - farewell
+    - Goodbye
+    - oh, ok, Goodbye then!
+    - thank you goodbye
+    - goodbye, thank you
+- intent: affirm
+  examples: |
+    - yes
+    - y
+    - indeed
+    - of course
+    - that sounds good
+    - correct
+    - ok
+    - fine
+    - yup
+    - yes, please
+    - Yup
+    - Yes, please
+    - Yes
+    - Hell yeah!
+- intent: deny
+  examples: |
+    - no
+    - n
+    - never
+    - I don't think so
+    - don't like that
+    - no way
+    - not really
+    - out of the question
+    - no, sorry, changed my mind
+    - no, thanks
+    - no, thank you
+    - No, thank nyou
+- intent: bot_challenge
+  examples: |
+    - are you a bot?
+    - are you a human?
+    - am I talking to a bot?
+    - am I talking to a human?
+    - you're not real
+    - youre not real
+    - youre a bot
+    - you're a bot
+- intent: whats_on_the_menu
+  examples: |
+    - what do you have
+    - show me the menu
+    - what it on the menu
+    - what's on the menu
+    - show me everything
+    - show all dishes
+    - show all items
+    - show all
+    - Please, show me the menu
+    - What is the menu?
+    - Can you show me what you've got?
+    - Hello, what do you have on the menu?
+- intent: place_a_specific_order
+  examples: |
+    - I would like to have [Spaghetti](item)
+    - [Spaghetti](item) please
+    - give me [Lasagne](item)
+    - I'd like to have [Pizza](item)
+    - I want [Spaghetti](item)
+    - I'll have [Spaghetti](item)
+    - I want to have [Spaghetti](item)
+    - I wanna eat a [Burger](item)
+    - Give me a [Hot-dog](item)
+    - [Carbonara](item) please!
+    - I'll have [Tiramisu](item)
+    - I'll have a [coffee](item)
+    - Do you have [goulash](item)?
+    - I'm taking a piece of [pie](item)
+    - I'll have a [cake](item)
+    - I'll go with a [mutton chop](item)
+    - Do you have [tea](item)
+    - A [sandwitch](item), please
+    - Do you have a [banana](item)
+    - I'd liek a [spaghetti](item)
+    - Hello, I'd like to order a [banana](item)
+    - OK, I'd like a [banana](item), then
+    - OK, I'd like ot have a [banana](item) then
+    - I'd like a [burger](item)
+    - I'll have a [burger](item)
+    - Hello, I'll have a [hotdog](item)
+    - I'd like to order [spaghetti](item)
+    - Hello, I'd like to have a [burgeer](item)
+- intent: are_we_open_at_date_time
+  examples: |
+    - open [tomorrow](date)?
+    - are you open on [Saturday](date)?
+    - are you workin on [Sunday](date)?
+    - are you open [today](date) at [13:30](time)?
+    - are you open after [5pm](time)?
+    - are you open at [3:30am](time)
+    - are going to be open at [11pm](time) on [Monday](date)?
+    - are you open on [24.01](date)?
+    - are you working on [Tuesday](date)?
+    - are you working at [noon](time) [today](date)
+    - were you open [yesterday](date)?
+    - OK, are you open on [mondays](date)?
+    - OK, are you open on [wednesdays](date)?
+    - ok, oh by the way, are you open [tomorrow](date) at [9pm](time)?
+    - Are you open [tomorrow](date) at [2am](time)?
+- intent: list_specifics
+  examples: |
+    - extra large
+    - double cheese
+    - I want some paper towels with this
+    - don't add any cheese
+    - please hurry
+    - additional tomatoes
+    - add plastic cutlery
+    - iclude straws
+    - no sauce
+    - add onions
+    - I'd like the banana to be yellow

@@ -1,0 +1,262 @@
+version: "3.0"
+
+stories:
+
+- story: can you help me show menu
+  steps:
+  - intent: need_help
+  - action: utter_greet
+  - action: utter_can_i_help
+  - intent: whats_on_the_menu
+  - action: action_fetch_all_menu
+
+- story: ask if open on a date
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: are_we_open_at_date_time
+  - action: action_tell_if_open_on_date_time
+
+# - story: decline order
+#   steps:
+#   - intent: place_a_specific_order
+#   - action: action_check_if_on_menu
+#   - intent: deny
+#   - action: utter_goodbye
+
+- story: ordering without specifics
+  steps:
+  - intent: place_a_specific_order
+  - action: action_check_if_on_menu
+  - intent: affirm
+  - action: utter_any_additional_requests
+  - intent: deny
+  - action: action_place_an_order
+
+- story: ordering with specifics
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: place_a_specific_order
+  - action: action_check_if_on_menu
+  - intent: affirm
+  - action: utter_any_additional_requests
+  - intent: affirm
+  - action: utter_please_enter_specifics
+  - intent: list_specifics
+  - action: action_place_an_order
+
+- story: interactive_story_1
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: whats_on_the_menu
+  - action: action_fetch_all_menu
+  - intent: are_we_open_at_date_time
+    entities:
+    - date: mondays
+  - slot_was_set:
+    - date: mondays
+  - action: action_tell_if_open_on_date_time
+  - intent: place_a_specific_order
+    entities:
+    - item: banana
+  - action: action_check_if_on_menu
+  - intent: place_a_specific_order
+    entities:
+    - item: spaghetti
+  - slot_was_set:
+    - item: spaghetti
+  - action: action_check_if_on_menu
+  - intent: affirm
+  - action: utter_any_additional_requests
+  - intent: deny
+  - action: action_place_an_order
+
+- story: interactive_story_1
+  steps:
+  - intent: place_a_specific_order
+    entities:
+    - item: banana
+  - slot_was_set:
+    - item: banana
+  - slot_was_set:
+    - specifics: Hello, I'd like to order a banana
+  - action: action_check_if_on_menu
+  - intent: affirm
+  - slot_was_set:
+    - specifics: yes, please
+  - action: utter_any_additional_requests
+  - intent: affirm
+  - slot_was_set:
+    - specifics: Yup
+  - action: utter_please_enter_specifics
+  - intent: list_specifics
+  - slot_was_set:
+    - specifics: add onions
+  - action: action_place_an_order
+
+- story: interactive_story_1
+  steps:
+  - intent: need_help
+  - slot_was_set:
+    - specifics: Hello, is anyone htere?
+  - action: utter_greet
+  - action: utter_can_i_help
+  - intent: whats_on_the_menu
+  - slot_was_set:
+    - specifics: What is the menu?
+  - action: action_fetch_all_menu
+  - intent: are_we_open_at_date_time
+    entities:
+    - date: wednesdays
+  - slot_was_set:
+    - date: wednesdays
+  - slot_was_set:
+    - specifics: OK, are you open on wednesdays?
+  - action: action_tell_if_open_on_date_time
+  - intent: place_a_specific_order
+    entities:
+    - item: banana
+  - slot_was_set:
+    - item: banana
+  - slot_was_set:
+    - specifics: OK, I'd like a banana, then
+  - action: action_check_if_on_menu
+  - intent: affirm
+  - slot_was_set:
+    - specifics: Yup
+  - action: utter_any_additional_requests
+  - intent: deny
+  - slot_was_set:
+    - specifics: not really
+  - action: action_place_an_order
+
+- story: interactive_story_1
+  steps:
+  - intent: need_help
+  - slot_was_set:
+    - specifics: Hello, is anyone there?
+  - action: utter_greet
+  - action: utter_can_i_help
+  - intent: whats_on_the_menu
+  - slot_was_set:
+    - specifics: Can you show me what you've got?
+  - action: action_fetch_all_menu
+  - intent: place_a_specific_order
+    entities:
+    - item: banana
+  - slot_was_set:
+    - item: banana
+  - slot_was_set:
+    - specifics: OK, I'd like ot have a banana then
+  - action: action_check_if_on_menu
+  - intent: affirm
+  - slot_was_set:
+    - specifics: Yes, please
+  - action: utter_any_additional_requests
+  - intent: affirm
+  - slot_was_set:
+    - specifics: Yes
+  - action: utter_please_enter_specifics
+  - intent: list_specifics
+  - action: action_place_an_order
+  - intent: are_we_open_at_date_time
+    entities:
+    - date: tomorrow
+    - time: 9pm
+  - slot_was_set:
+    - date: tomorrow
+  - slot_was_set:
+    - time: 9pm
+  - slot_was_set:
+    - specifics: ok, oh by the way, are you open tomorrow at 9pm?
+  - action: action_tell_if_open_on_date_time
+
+- story: interactive_story_1
+  steps:
+  - intent: whats_on_the_menu
+  - slot_was_set:
+    - specifics: Hello, what do you have on the menu?
+  - action: action_fetch_all_menu
+  - intent: place_a_specific_order
+    entities:
+    - item: burger
+  - slot_was_set:
+    - item: burger
+  - slot_was_set:
+    - specifics: I'd like a burger
+  - action: action_check_if_on_menu
+  - intent: deny
+  - action: utter_goodbye
+  - intent: place_a_specific_order
+    entities:
+    - item: burger
+  - slot_was_set:
+    - specifics: I'll have a burger
+  - action: action_check_if_on_menu
+  - intent: affirm
+  - slot_was_set:
+    - specifics: yes, please
+  - action: utter_any_additional_requests
+  - intent: deny
+  - slot_was_set:
+    - specifics: no, thanks
+  - action: action_place_an_order
+
+- story: interactive_story_1
+  steps:
+  - intent: place_a_specific_order
+    entities:
+    - item: hotdog
+  - slot_was_set:
+    - item: hotdog
+  - slot_was_set:
+    - specifics: Hello, I'll have a hotdog
+  - action: action_check_if_on_menu
+  - intent: affirm
+  - slot_was_set:
+    - specifics: yes, please
+  - action: utter_any_additional_requests
+  - intent: deny
+  - slot_was_set:
+    - specifics: no, thank you
+  - action: action_place_an_order
+  - intent: are_we_open_at_date_time
+    entities:
+    - date: tomorrow
+    - time: 2am
+  - action: action_tell_if_open_on_date_time
+  - intent: place_a_specific_order
+    entities:
+    - item: spaghetti
+  - slot_was_set:
+    - item: spaghetti
+  - slot_was_set:
+    - specifics: I'd like to order spaghetti
+  - action: action_check_if_on_menu
+  - intent: affirm
+  - slot_was_set:
+    - specifics: yup
+  - action: utter_any_additional_requests
+  - intent: deny
+  - slot_was_set:
+    - specifics: no, thanks
+  - action: action_place_an_order
+
+- story: interactive_story_1
+  steps:
+  - intent: place_a_specific_order
+    entities:
+    - item: burgeer
+  - slot_was_set:
+    - item: burgeer
+  - slot_was_set:
+    - specifics: Hello, I'd like to have a burgeer
+  - action: action_check_if_on_menu
+  - intent: affirm
+  - action: utter_any_additional_requests
+  - intent: deny
+  - slot_was_set:
+    - specifics: No, thank nyou
+  - action: action_place_an_order

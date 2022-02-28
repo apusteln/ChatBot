@@ -1,0 +1,43 @@
+{
+  "items": [
+    {
+      "name": "Burger",
+      "price": 12.5,
+      "preparation_time": 0.2,
+      "customer": "912bee49314c42828bcf6b9582916322"
+    },
+    {
+      "name": "Pizza",
+      "price": 12,
+      "preparation_time": 0.5,
+      "customer": "U034KBRRRSL",
+      "specifics": "extra pepperoni"
+    },
+    {
+      "name": "Burger",
+      "price": 12.5,
+      "preparation_time": 0.2,
+      "customer": "U034KBRRRSL",
+      "specifics": "add extra sauce"
+    },
+    {
+      "name": "Hot-dog",
+      "price": 4,
+      "preparation_time": 0.1,
+      "customer": "U034KBRRRSL",
+      "specifics": "add extra sauce"
+    },
+    {
+      "name": "cheeseburger",
+      "customer": "U034KBRRRSL",
+      "specifics": "please add extra fries"
+    },
+    {
+      "name": "Spaghetti Carbonara",
+      "price": 15,
+      "preparation_time": 0.5,
+      "customer": "U034KBRRRSL",
+      "specifics": "add paper towels"
+    }
+  ]
+}
