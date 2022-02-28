@@ -45,7 +45,6 @@ class FetchAllMenu(Action):
 
         string = "This is how our menu looks like:\n\n"
 
-        print(menu_dict)
         for el in menu_dict["items"]:
             string += "   {}  ${}\n   prep time: {} mins\n\n\n".format(el["name"],el["price"], el["preparation_time"]*60)
 
@@ -75,7 +74,6 @@ class CheckIfOnMenu(Action):
         message = ""
 
         item_str = next(tracker.get_latest_entity_values("item"), None)
-        print(item_str)
 
         with open(Path(os.path.realpath(__file__)) / ".." / "menu.json") as menu:
             menu_dict = json.load(menu)
@@ -90,17 +88,15 @@ class CheckIfOnMenu(Action):
         with open(Path(os.path.realpath(__file__)) / ".." / "orders.json") as orders:
             orders_dict = json.load(orders)
 
-        print(menu_dict)
-        print(orders_dict)
+        # print(menu_dict)
+        # print(orders_dict)
 
         if item_str:
-            print(menu_names_list_divided_by_words)
             ratio_list = [SequenceMatcher(None, s[0], item_str).ratio() for s in menu_names_list_divided_by_words]
-            print(ratio_list)
             ratio_list = [r if r > self.THRESHOLD else 0 for r in ratio_list]
 
-            print(ratio_list)
-            print(menu_names_list)
+            # print(ratio_list)
+            # print(menu_names_list)
 
             if any(ratio_list):
                 idx = max(ratio_list)
@@ -108,7 +104,7 @@ class CheckIfOnMenu(Action):
                 name, idx = menu_names_list_divided_by_words[idx]
                 item_from_menu = menu_dict["items"][idx]
 
-            print(item_from_menu)
+            # print(item_from_menu)
             if item_str and item_from_menu:
                 message = "We have {} on the menu.\n" \
                           "It costs {} and takes {} minutes to make".format(item_from_menu["name"],
@@ -198,7 +194,7 @@ class PlaceAnOrder(Action):
 
             item = {}
 
-            print(item_from_menu)
+            # print(item_from_menu)
             with open(Path(os.path.realpath(__file__)) / ".." / "orders.json") as orders:
                 orders_dict = json.load(orders)
 
@@ -303,8 +299,6 @@ class TellIfOpenOnDateTime(Action):
         if day not in DAYS_LIST:
             raise AttributeError("Bad day name for DAYS_LIST")
 
-        #print(json)
-
         start = json["items"][day]["open"]
         end = json["items"][day]["close"]
 
@@ -326,8 +320,8 @@ class TellIfOpenOnDateTime(Action):
 
         date_str = next(tracker.get_latest_entity_values("date"), None)
         time_str = next(tracker.get_latest_entity_values("time"), None)
-        print(date_str)
-        print(time_str)
+        # print(date_str)
+        # print(time_str)
 
         # date_str = None
         # time_str = None
@@ -342,31 +336,19 @@ class TellIfOpenOnDateTime(Action):
         answer = ""
 
         if not date_str and not time_str:
-            print("IN 0")
             dispatcher.utter_message(text="Sorry, I didn't understand that question.")
             return []
 
-        # if date_found:
-        #     date_str = self.get_first_found_entity(tracker.latest_message, "date")
-        #
-        # if time_found:
-        #     time_str = self.get_first_found_entity(tracker.latest_message, "time")
-
         if date_str:
-            print([SequenceMatcher(None, c, date_str).ratio() for c in DAYS_LIST])
             date_str = date_str.lower()
             if SequenceMatcher(None, "today", date_str).ratio() > 0.65:
-                print("COM 1")
                 date = "today"
             elif SequenceMatcher(None, "tomorrow", date_str).ratio() > 0.65:
-                print("COM 2")
                 date = "tomorrow"
             elif SequenceMatcher(None, "yesterday", date_str).ratio() > 0.65:
-                print("COM 3")
                 date = "yesterday"
 
             elif "." in date_str and 2 <= len(date_str.split(".")) <= 3 and all([c.isdigit() for c in date_str.split(".")]):
-                print("COM 4")
                 if len(date_str.split(".")) == 2:
                     day, month = date_str.split(".")
                     day = int(day)
@@ -386,7 +368,6 @@ class TellIfOpenOnDateTime(Action):
                         date = None
 
             elif any([SequenceMatcher(None, c, date_str).ratio() > 0.65 for c in DAYS_LIST]):
-                print("COM 5")
                 idx = max([SequenceMatcher(None, c, date_str).ratio() for c in DAYS_LIST])
                 idx = [SequenceMatcher(None, c, date_str).ratio() for c in DAYS_LIST].index(idx)
                 date = DAYS_LIST[idx]
@@ -397,7 +378,6 @@ class TellIfOpenOnDateTime(Action):
                 date = "today"
             if any(c.isdigit() for c in time_str):
                 hours, minutes = self.is_it_hour_min_format(time_str)
-                print(hours, minutes)
 
         with open(Path(os.path.realpath(__file__)) / ".." / "opening_hours.json") as oh:
             hours_dict = json.load(oh)
@@ -406,7 +386,6 @@ class TellIfOpenOnDateTime(Action):
             hours = hours + minutes / 60
 
         if isinstance(date, str) and date == "today" or isinstance(date, datetime.datetime) and date == datetime.date.today():
-            print("IN 1")
             are_we_opened, string = self.are_we_open_on_day(day=datetime.datetime.now().strftime("%A"), hour=hours, json=hours_dict)
             if are_we_opened:
                 answer = "Yes, we're open today!\n"
@@ -415,7 +394,6 @@ class TellIfOpenOnDateTime(Action):
             answer += string
 
         elif isinstance(date, str) and date == "tomorrow" or isinstance(date, datetime.datetime) and date == datetime.date.today() + datetime.timedelta(days=1):
-            print("IN 2")
             are_we_opened, string = self.are_we_open_on_day( day=(datetime.datetime.today() + datetime.timedelta(days=1)).strftime("%A"), hour=hours, json=hours_dict)
             if are_we_opened:
                 answer = "Yes, we're open tomorrow!\n"
@@ -424,7 +402,6 @@ class TellIfOpenOnDateTime(Action):
             answer += string
 
         elif isinstance(date, str) and date == "yesterday" or isinstance(date, datetime.datetime) and date == datetime.date.today() - datetime.timedelta(days=1):
-            print("IN 3")
             are_we_opened, string = self.are_we_open_on_day(day=(datetime.datetime.today() - datetime.timedelta(days=1)).strftime("%A"), hour=hours, json=hours_dict)
             if are_we_opened:
                 answer = "Yes, we're open yesterday!\n"
@@ -433,7 +410,6 @@ class TellIfOpenOnDateTime(Action):
             answer += string
 
         elif isinstance(date, str):
-            print("IN 4")
             are_we_opened, string = self.are_we_open_on_day(day=date, hour=hours, json=hours_dict)
             if are_we_opened:
                 answer = "Yes, we're open!\n"
@@ -442,7 +418,6 @@ class TellIfOpenOnDateTime(Action):
             answer += string
 
         elif isinstance(date, datetime.datetime) and date.date() > datetime.date.today():
-            print("IN 5")
             are_we_opened, string = self.are_we_open_on_day(day=date.strftime("%A"), hour=hours, json=hours_dict)
             if are_we_opened:
                 answer = "Yes, we're open on that day!\n"
@@ -451,7 +426,6 @@ class TellIfOpenOnDateTime(Action):
             answer += string
 
         elif isinstance(date, datetime.datetime) and date.date() < datetime.date.today():
-            print("IN 6")
             are_we_opened, string = self.are_we_open_on_day(day=date.strftime("%A"), hour=hours, json=hours_dict)
             if are_we_opened:
                 answer = "Yes, we were opened on that day!\n"
@@ -460,7 +434,6 @@ class TellIfOpenOnDateTime(Action):
             answer += string
 
         if len(answer) == 0:
-            print("IN 7")
             answer = "Sorry, I didn't understand that"
 
         dispatcher.utter_message(text=answer)
