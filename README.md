@@ -2,6 +2,11 @@
 
 This is a simple chatbot built on Rasa for ordering food from a restaurant. It can answer the questions about the menu and whether the restaurant is open in a given time (fetching the data from json files in /actions/), and is capable of ordering one item, either from or not from the menu. It can also try to get specifics for a given order.
 
+The chatbot is operational on the following slack channel:
+
+https://chatbot-omu4636.slack.com/archives/C033WAULDBM
+
+
 Here's how it answers about the menu:
 
 ![asking_for_menu](https://github.com/apusteln/ChatBot/blob/main/obrazki/asking_for_menu.png)
